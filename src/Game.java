@@ -5,13 +5,8 @@ import java.awt.Graphics;
 
 class Game extends JPanel {
 
-
 	public void gameLoop() {
 		boolean quit = false;
-		JFrame frame = new JFrame("Terrapart!");
-		frame.setSize(600,600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
 
 		while (!quit) {
 			this.repaint();

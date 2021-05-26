@@ -9,19 +9,22 @@ import javax.swing.SwingUtilities;
 
 class Window extends JFrame { 
 
-	JFrame thisFrame;
+	JFrame frame;
+
+	int ROWS    = 1080;
+	int COLUMNS = 1920;
 	    
 	Window() { 
-		super("Start Screen");
-		this.thisFrame = this; //lol  
+		super("Terrapart!");
+		this.frame = this;
 	                  
-		this.setSize(400,700);    
-		this.setLocationRelativeTo(null); //start the frame in the center of the screen
-		this.setResizable (false);
+		this.setSize(COLUMNS, ROWS);    
+		this.setLocationRelativeTo(null);
+		this.setResizable(true);
 		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
-		thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	                                                      
 		this.add(new Game());
 		this.setVisible(true);
