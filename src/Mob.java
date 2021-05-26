@@ -10,7 +10,7 @@ abstract class Mob{
     protected int health;
     protected int damage;
     protected int speed;
-    protected boolean dead = false;
+    protected boolean isDead = false;
 
     private BufferedImage sprite;
     String spriteName;
@@ -105,7 +105,7 @@ class Zombie extends Mob{
     private BufferedImage sprite;
     String spriteName;
 
-    Player(int x, int y, int health, int speed, int damage, boolean dead, String spriteName){
+    Zombie(int x, int y, int health, int speed, int damage, boolean dead, String spriteName){
         super(x, y, health, speed, damage, dead, spriteName);
     }
 
