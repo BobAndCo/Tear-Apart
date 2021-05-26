@@ -13,15 +13,14 @@ class Game extends JPanel {
     boolean quit = false;
     
     while (!quit) {
-      player.move();
       this.repaint();
     }
   }
   
   public void paintComponent(Graphics g) {
+    player.move();
     super.paintComponent(g);
     setDoubleBuffered(true);
-    player.draw(g);
   }
   
 }
