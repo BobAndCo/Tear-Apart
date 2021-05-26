@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 
 abstract class Mob{
+<<<<<<< HEAD
   
   String SPRITE_PATH      = "../sprites/";
   String SPRITE_EXTENSION = ".jpeg";
@@ -19,6 +20,17 @@ abstract class Mob{
   String spriteName;
   
   Mob(int x, int y, int health, int speed, int damage, boolean dead, String spriteName){
+=======
+
+    protected int x,y;
+    protected int health;
+    protected int damage;
+    protected int speed;
+    protected boolean isDead = false;
+
+    private BufferedImage sprite;
+    String spriteName;
+>>>>>>> 543f9853529d12a72f0b3612baadb85a7e2a681e
     
     this.x = x;
     this.y = y;
@@ -104,6 +116,7 @@ class Player extends Mob{
 }
 
 class Zombie extends Mob{
+<<<<<<< HEAD
   
   protected int x,y;
   protected int health;
@@ -138,3 +151,39 @@ class Zombie extends Mob{
   } 
   
 }
+=======
+
+    protected int x,y;
+    protected int health;
+    protected int speed;
+    protected int damage;
+    protected boolean dead;
+
+    private BufferedImage sprite;
+    String spriteName;
+
+    Zombie(int x, int y, int health, int speed, int damage, boolean dead, String spriteName){
+        super(x, y, health, speed, damage, dead, spriteName);
+    }
+
+    public void attack(Mob attackedMob){
+
+        attackedMob.health -= this.damage;
+
+    }
+
+    public void move(int dx, int dy){
+
+        this.x += dx;
+        this.y = dy;
+
+    }
+
+    public void takeDamage(int damageAmount){
+
+        this.health -= damageAmount;
+
+    } 
+
+}
+>>>>>>> 543f9853529d12a72f0b3612baadb85a7e2a681e
