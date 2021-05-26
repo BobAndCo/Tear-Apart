@@ -23,7 +23,7 @@ class Window extends JFrame {
 		mainPanel.setLayout(new BorderLayout());
 		thisFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	                                                      
-		this.add(mainPanel);
+		this.add(new Game());
 		this.setVisible(true);
 		this.requestFocusInWindow();
 	}

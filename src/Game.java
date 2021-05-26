@@ -5,7 +5,6 @@ import java.awt.Graphics;
 
 class Game extends JPanel {
 
-	Block dirt = new Dirt(10,10,10);
 
 	public void gameLoop() {
 		boolean quit = false;
@@ -22,7 +21,6 @@ class Game extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setDoubleBuffered(true);
-		dirt.draw(g);
 	}
 
 }
