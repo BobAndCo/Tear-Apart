@@ -45,7 +45,7 @@ class Block {
 		return null;
 	}
 
-	public void draw(Graphics g, int x, int y) {
+	public void draw(Graphics g) {
 		g.fillRect(x*BLOCK_SIDE, y*BLOCK_SIDE, BLOCK_SIDE, BLOCK_SIDE);  
 	}
 }
