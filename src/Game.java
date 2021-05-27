@@ -1,10 +1,13 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.io.File;
+import javax.imageio.ImageIO;
 import java.awt.Graphics;
 
 class Game extends JPanel {
   
+	Biome plains = new Biome("plains");
 	Player player = new Player(100,100,100,25,1,false,"sprite");
 	PlayerController playerController = new PlayerController(player);
   
@@ -28,6 +31,8 @@ class Game extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		setDoubleBuffered(true);
+		drawBackground(g);
+		plains.renderBiome(g);
 		player.move();
 	}
   
