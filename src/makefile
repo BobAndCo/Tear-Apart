@@ -8,3 +8,4 @@ run:
 
 clean:
 	rm *.class
+	rm *.java~
