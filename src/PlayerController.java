@@ -5,28 +5,29 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 class PlayerController implements KeyListener {
-  
-  //reference to items effected by keyboard press
-  private Player player;
-  
+
+  // reference to items effected by keyboard press
+  Player player;
+
   PlayerController(Player p) {
     player = p;
   }
-  
-  public void keyTyped(KeyEvent e) {  
-    
-    
+
+  public void keyTyped(KeyEvent e) {
+    if (e.getKeyChar() == 'a') {
+      player.moveLeft();
+      System.out.println("WHY?");
+    } else if (e.getKeyChar() == 'd') {
+      player.moveRight();
+    }
   }
-  
+
   public void keyPressed(KeyEvent e) {
-    if(e.getKeyChar() == 'a' ){   
-      player.move(player.speed,0);  
-      System.out.println("pressed");
-    } else if(e.getKeyChar() == 'd' ){
-      player.move(player.speed,0);
-    } 
-  }   
-  
-  public void keyReleased(KeyEvent e) {
+
   }
-} //end of keyboard listener
+
+  public void keyReleased(KeyEvent e) {
+
+  }
+
+} // end of keyboard listener
