@@ -16,6 +16,7 @@ class PlayerController implements KeyListener {
   public void keyTyped(KeyEvent e) {
     if (e.getKeyChar() == 'a') {
       player.moveLeft();
+      System.out.println("WHY?");
     } else if (e.getKeyChar() == 'd') {
       player.moveRight();
     }
