@@ -38,7 +38,10 @@ class Player {
 
   }
 
-  public void attack() {
+  public void attack(Mob mob) {
+
+    mob.takeDamage(this.damage);
+
   }
 
   public void move() {
