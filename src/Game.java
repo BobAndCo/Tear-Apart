@@ -8,14 +8,18 @@ import java.awt.Graphics;
 class Game extends JPanel {
 
   Player player;
-  Zombie zombie1;
-  Zombie zombie2;
+
+  Mob[] mobs;
 
   Game() {
 
     player = new Player(300, 300, 100, 25, 1, false, "sprite");
-    zombie1 = new Zombie(200, 200);
-    zombie2 = new Zombie(150, 250);
+
+    mobs = new Mob[5];
+
+    for (int i = 0; i < mobs.length; i++) {
+      mobs[i] = new Zombie(100 + (50 * i), 100 + (75 * i));
+    }
 
     PlayerController playerController = new PlayerController(player);
     this.addKeyListener(playerController);
@@ -51,13 +55,11 @@ class Game extends JPanel {
     player.move();
     player.draw(g);
 
-    zombie1.pathFinding(player);
-    zombie1.move();
-    zombie1.draw(g);
-
-    zombie2.pathFinding(player);
-    zombie2.move();
-    zombie2.draw(g);
+    for (int i = 0; i < mobs.length; i++) {
+      mobs[i].pathFinding(player);
+      mobs[i].move();
+      mobs[i].draw(g);
+    }
 
     this.repaint();
   }
