@@ -47,6 +47,11 @@ abstract class Mob {
             this.moveLeft();
             this.move();
         }
+        try {
+            Thread.sleep(10);
+        } catch (Exception exc) {
+            System.out.println("Thread Error");
+        }
 
     }
 
@@ -103,6 +108,9 @@ class Zombie extends Mob {
 
     Zombie(int x, int y, int health, int speed, int damage, boolean dead) {
         super(x, y, health, speed, damage, dead, "dirt");
+    }
+    Zombie(int x, int y) {
+        super(x, y, 100, 1, 10, false, "dirt");
     }
 
 }
