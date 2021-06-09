@@ -13,7 +13,7 @@ class Game extends JPanel {
   Game() {
 
     player = new Player(300, 300, 100, 25, 1, false, "dirt");
-    zombie1 = new Zombie(200, 200, 100, 10, 1, false);
+    zombie1 = new Zombie(200, 200, 100, 25, 1, false, "dirt");
 
     PlayerController playerController = new PlayerController(player);
     this.addKeyListener(playerController);
