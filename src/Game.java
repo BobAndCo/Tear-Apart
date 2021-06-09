@@ -9,11 +9,13 @@ class Game extends JPanel {
 
   Player player;
   Zombie zombie1;
+  Zombie zombie2;
 
   Game() {
 
-    player = new Player(300, 300, 100, 25, 1, false, "dirt");
-    zombie1 = new Zombie(200, 200, 100, 25, 1, false, "dirt");
+    player = new Player(300, 300, 100, 25, 1, false, "sprite");
+    zombie1 = new Zombie(200, 200);
+    zombie2 = new Zombie(150, 250);
 
     PlayerController playerController = new PlayerController(player);
     this.addKeyListener(playerController);
@@ -52,6 +54,10 @@ class Game extends JPanel {
     zombie1.pathFinding(player);
     zombie1.move();
     zombie1.draw(g);
+
+    zombie2.pathFinding(player);
+    zombie2.move();
+    zombie2.draw(g);
 
     this.repaint();
   }

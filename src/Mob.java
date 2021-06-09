@@ -47,6 +47,11 @@ abstract class Mob {
             this.moveLeft();
             this.move();
         }
+        try {
+            Thread.sleep(10);
+        } catch (Exception exc) {
+            System.out.println("Thread Error");
+        }
 
     }
 
@@ -95,19 +100,8 @@ abstract class Mob {
 
 class Zombie extends Mob {
 
-    public int x, y;
-    public int health;
-    public int damage;
-    public int speed;
-    public boolean isDead;
-
-    public int dx, dy;
-
-    public BufferedImage sprite;
-    String spriteName;
-
-    Zombie(int x, int y, int health, int speed, int damage, boolean dead, String spriteName) {
-        super(x, y, health, speed, damage, dead, spriteName);
+    Zombie(int x, int y) {
+        super(x, y, 100, 1, 10, false, "dirt");
     }
 
 }
