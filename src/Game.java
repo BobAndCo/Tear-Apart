@@ -13,9 +13,7 @@ class Game extends JPanel {
 
   Game() {
 
-    player = new Player(300, 300, 100, 25, 1, false, "dirt");
-
-    player = new Player(300, 300, 100, 25, 1, false, "sprite");
+    player = new Player(300, 300, 100, 25, 10, 1, false, "dirt");
 
     mobs = new Mob[5];
 
