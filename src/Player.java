@@ -13,22 +13,30 @@ class Player {
   public int health;
   public int damage;
   public int speed;
+  public int jumpHeight;
+
   public boolean isDead;
+  public boolean falling = true;
+  public boolean jumping = false;
 
   public int dx, dy;
 
   public BufferedImage sprite;
   String spriteName;
 
-  Player(int x, int y, int health, int speed, int damage, boolean dead, String spriteName) {
+  Player(int x, int y, int health, int speed, int jumpHeight, int damage, boolean dead, String spriteName) {
 
     this.x = x;
     this.y = y;
+
     this.health = health;
-    this.speed = speed;
     this.damage = damage;
+
+    this.speed = speed;
+    this.jumpHeight = jumpHeight;
+
     this.dx = 0;
-    this.dy = 0;
+    this.dy = 1;
 
     this.sprite = loadSprite(SPRITE_PATH + spriteName + SPRITE_EXTENSION);
 
@@ -48,6 +56,7 @@ class Player {
     this.x = this.x + this.dx;
     this.y = this.y + this.dy;
     this.dx = 0;
+    this.dy = 1;
   }
 
   public void moveRight() {
@@ -56,6 +65,14 @@ class Player {
 
   public void moveLeft() {
     this.dx = -this.speed;
+  }
+
+  public void jump() {
+    if (this.jumping && !this.falling) {
+      this.dy = -this.jumpHeight;
+      this.jumping = false;
+      this.falling = true;
+    }
   }
 
   public void takeDamage(int damageTaken) {

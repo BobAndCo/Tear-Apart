@@ -18,6 +18,10 @@ class PlayerController implements KeyListener {
       player.moveLeft();
     } else if (e.getKeyChar() == 'd') {
       player.moveRight();
+    } else if (e.getKeyChar() == 'j') {
+      player.jumping = true;
+      player.falling = false;
+      player.jump();
     }
   }
 

@@ -12,9 +12,15 @@ class Game extends JPanel {
   Mob[] mobs;
   
   Game() {
+<<<<<<< HEAD
     
     player = new Player(300, 300, 100, 25, 1, false, "grass");
     
+=======
+
+    player = new Player(300, 300, 100, 25, 10, 1, false, "dirt");
+
+>>>>>>> 2d7acbe5653d07fcf2e86d9f0dd876a4db7e42a2
     mobs = new Mob[5];
     
     for (int i = 0; i < mobs.length; i++) {
