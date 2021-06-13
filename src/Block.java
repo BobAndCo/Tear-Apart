@@ -14,11 +14,13 @@ class Block {
 	protected int durability;
 	BufferedImage sprite;
 	boolean broken = false;
+	private String TYPE;
 
 	Block(int x, int y, String type) {
 		this.x          = x;
 		this.y          = y;
 		this.sprite     = loadSprite(SPRITE_PATH+type+SPRITE_EXTENSION);
+		this.TYPE       = type;
 		switch (type) {
 			case "grass" : this.durability = 10; break;
 			case "dirt"  : this.durability = 10; break;
@@ -28,6 +30,10 @@ class Block {
 			case "wood"  : this.durability = 11; break;
 			case "leaf"  : this.durability = 01; break;
 		}
+	}
+
+	public String getType() {
+		return TYPE;
 	}
 
 	public void loseDurability(int durability) {

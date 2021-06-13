@@ -56,8 +56,7 @@ class Game extends JPanel {
     super.paintComponent(g);
     setDoubleBuffered(true);
     
-    //this.drawBackground(g);
-    
+	b.saveBiome();
     player.move();
     player.draw(g);
     
