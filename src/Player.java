@@ -4,10 +4,10 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 
-class Player {
+class Player{
 
   String SPRITE_PATH = "../sprites/";
-  String SPRITE_EXTENSION = ".png";
+  String SPRITE_EXTENSION = ".jpg";
 
   public int x, y;
   public int health;
@@ -20,6 +20,7 @@ class Player {
   public boolean jumping = false;
 
   public int dx, dy;
+  public Rectangle rectangle; 
 
   public BufferedImage sprite;
   String spriteName;
@@ -96,6 +97,7 @@ class Player {
 
   public void draw(Graphics g) {
     g.drawImage(this.sprite, this.x, this.y, null);
+    g.drawRect(this.x, this.y, 30, 30);
   }
 
 }

@@ -9,3 +9,12 @@ run:
 clean:
 	rm *.class
 	rm *.java~
+	
+cleanWindows:
+	del /f *.class
+	del /f *.java~
+
+runWindows:
+	javac *.java
+	java Window
+	del /f *.class

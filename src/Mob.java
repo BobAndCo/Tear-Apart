@@ -94,6 +94,7 @@ abstract class Mob {
 
     public void draw(Graphics g) {
         g.drawImage(this.sprite, this.x, this.y, null);
+        g.drawRect(this.x, this.y, 30, 30);
     }
 
 }

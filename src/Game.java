@@ -10,35 +10,21 @@ class Game extends JPanel {
   Player player;
   
   Mob[] mobs;
-<<<<<<< HEAD
 
-  Biome b = new Biome("desert");
-
-=======
+  Biome b = new Biome("tundra");
   
->>>>>>> a425f368b7c4e0c1a5e8c8825fd3ef0907483d0c
   Game() {
-<<<<<<< HEAD
     
-    player = new Player(300, 300, 100, 25, 1, false, "grass");
-    
-=======
+    player = new Player(300, 300, 100, 25, 10, 1, false, "player");
 
-    player = new Player(300, 300, 100, 25, 10, 1, false, "dirt");
-
->>>>>>> 2d7acbe5653d07fcf2e86d9f0dd876a4db7e42a2
     mobs = new Mob[5];
     
     for (int i = 0; i < mobs.length; i++) {
       mobs[i] = new Zombie(100 + (50 * i), 100 + (75 * i));
     }
-<<<<<<< HEAD
 
     b.generateTerrain();
-
-=======
     
->>>>>>> a425f368b7c4e0c1a5e8c8825fd3ef0907483d0c
     PlayerController playerController = new PlayerController(player);
     this.addKeyListener(playerController);
     
@@ -70,6 +56,8 @@ class Game extends JPanel {
     super.paintComponent(g);
     setDoubleBuffered(true);
     
+    //this.drawBackground(g);
+    
     player.move();
     player.draw(g);
     
@@ -80,13 +68,9 @@ class Game extends JPanel {
         mobs[i].draw(g);
       }
     }
-<<<<<<< HEAD
 
     b.renderBiome(g);
-
-=======
     
->>>>>>> a425f368b7c4e0c1a5e8c8825fd3ef0907483d0c
     this.repaint();
   }
   
