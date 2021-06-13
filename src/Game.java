@@ -11,6 +11,8 @@ class Game extends JPanel {
 
   Mob[] mobs;
 
+  Biome b = new Biome("desert");
+
   Game() {
 
     player = new Player(300, 300, 100, 25, 10, 1, false, "dirt");
@@ -20,6 +22,8 @@ class Game extends JPanel {
     for (int i = 0; i < mobs.length; i++) {
       mobs[i] = new Zombie(100 + (50 * i), 100 + (75 * i));
     }
+
+    b.generateTerrain();
 
     PlayerController playerController = new PlayerController(player);
     this.addKeyListener(playerController);
@@ -60,6 +64,8 @@ class Game extends JPanel {
       mobs[i].move();
       mobs[i].draw(g);
     }
+
+    b.renderBiome(g);
 
     this.repaint();
   }
