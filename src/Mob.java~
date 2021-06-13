@@ -105,7 +105,10 @@ class Zombie extends Mob {
     public int damage;
     public int speed;
     public boolean isDead;
-    
+
+    Zombie(int x, int y, int health, int speed, int damage, boolean dead) {
+        super(x, y, health, speed, damage, dead, "dirt");
+    }
     Zombie(int x, int y) {
         super(x, y, 100, 1, 10, false, "dirt");
     }
