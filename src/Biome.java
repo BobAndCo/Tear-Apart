@@ -49,14 +49,6 @@ class Biome {
 		return mapBuffer;
 	}
 
-	public int[] getHeight() {
-		int[] arr = new int[groundOutline.length];
-		for (int i=0; i < groundOutline.length; i++) {
-			arr[i] = -1*(int)Math.round(groundOutline[i]) + Y_BUFFER_SIZE/2;
-		}
-		return arr;
-	}
-
 	public void saveBiome() {
 		try {
 			File saveFile = new File(SAVE_PATH + TYPE + SAVE_EXTENSION);
@@ -127,12 +119,12 @@ class Biome {
 
 		for (int i=0; i < Y_BUFFER_SIZE; i++) {
 			for (int j=0; j < X_BUFFER_SIZE; j++) {
-				if (i == -1*(int)Math.round(groundOutline[j]) + Y_BUFFER_SIZE/2) {
+				if (i == -1*(int)Math.round(groundOutline[j]) + (int)(Y_BUFFER_SIZE/(1.5))) {
 					mapBuffer[i][j] = new Block(j, i, outlineBlock);
-				} else if ((i >  -1*(int)Math.round(groundOutline[j])      + Y_BUFFER_SIZE/2) &&
-					     (i <= -1*(int)Math.round(undergroundOutline[j]) + Y_BUFFER_SIZE/2)) {
+				} else if ((i >  -1*(int)Math.round(groundOutline[j]) + (int)(Y_BUFFER_SIZE/(1.5))) &&
+					     (i <= -1*(int)Math.round(undergroundOutline[j]) + (int)(Y_BUFFER_SIZE/(1.5)))) {
 					mapBuffer[i][j] = new Block(j, i, fillBlock);
-				} else if (i > -1*(int)Math.round(undergroundOutline[j]) + Y_BUFFER_SIZE/2) {
+				} else if (i > -1*(int)Math.round(undergroundOutline[j]) + (int)(Y_BUFFER_SIZE/(1.5))) {
 					mapBuffer[i][j] = new Block(j, i, "stone");
 				}
 			}
