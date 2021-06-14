@@ -33,6 +33,18 @@ class Biome {
 		}
 	}
 
+	public void removeBlock(int x, int y) {
+		if (mapBuffer[y][x] != null) {
+			mapBuffer[y][x] = null;
+		}
+	}
+
+	public void addBlock(int x, int y, String type) {
+		if (mapBuffer[y][x] == null) {
+			mapBuffer[y][x] = new Block(x, y, type);
+		}
+	}
+
 	public int[] getHeight() {
 		int[] arr = new int[groundOutline.length];
 		for (int i=0; i < groundOutline.length; i++) {
