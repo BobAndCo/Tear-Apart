@@ -14,7 +14,9 @@ abstract class Mob {
   public int health;
   public int damage;
   public int speed;
+
   private boolean isDead;
+  private boolean falling = true;
 
   public int dx, dy;
   Rectangle mobRect;
@@ -30,15 +32,30 @@ abstract class Mob {
     this.speed = speed;
     this.damage = damage;
     this.dx = 0;
-    this.dy = 0;
+    this.dy = 1;
 
     this.sprite = loadSprite(SPRITE_PATH + spriteName + SPRITE_EXTENSION);
-    this.mobRect = new Rectangle(x, y, 50, 50);
+    this.mobRect = new Rectangle(x, y, 30, 30);
 
     this.isDead = dead;
 
     this.spriteName = spriteName;
 
+  }
+
+  public boolean collides(Rectangle rect) {
+    if (x < rect.x + 30 && x + 30 > rect.x && y < rect.y + 30 && y + 30 > rect.y) {
+      return true;
+    }
+    return false;
+  }
+
+  public boolean getFalling() {
+    return falling;
+  }
+
+  public void setFalling(boolean fall) {
+    this.falling = fall;
   }
 
   public boolean getDead() {
@@ -73,11 +90,17 @@ abstract class Mob {
   }
 
   public void move() {
-    this.x = this.x + this.dx;
-    this.y = this.y + this.dy;
+    this.x = this.x + (int) this.dx;
+    this.y = this.y + (int) this.dy;
     this.mobRect.x = this.x;
     this.mobRect.y = this.y;
-    this.dx = 0;
+    if (falling) {
+      this.dx = 0;
+      this.dy = 1;
+    } else {
+      this.dx = 0;
+      this.dy = 0;
+    }
   }
 
   public void moveRight() {

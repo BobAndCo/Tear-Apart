@@ -5,6 +5,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.awt.Rectangle;
 
 class Game extends JPanel {
 
@@ -18,7 +19,7 @@ class Game extends JPanel {
 
   Game() {
 
-    player = new Player(300, 300, 100, 25, 10, 1, false, "player");
+    player = new Player(300, 200, 100, 25, 10, 1, false, "player");
     this.addMouseListener(playerMouse);
 
     mobs = new ArrayList<Mob>();
@@ -62,15 +63,16 @@ class Game extends JPanel {
 
     // this.drawBackground(g);
 
-    b.addBlock(playerMouse.getX(), playerMouse.getY(), "dirt");
+    if (playerMouse.getButtonPressed().equals("left")) {
+      b.addBlock(playerMouse.getX(), playerMouse.getY(), "dirt");
+    } else if (playerMouse.getButtonPressed().equals("right")) {
+      b.removeBlock(playerMouse.getX(), playerMouse.getY());
+    }
+
     b.renderBiome(g);
 
     player.move();
     player.draw(g);
-
-    for (int i = 0; i < b.getHeight().length; i++) {
-
-    }
 
     for (int i = 0; i < mobs.size(); i++) {
       mobs.get(i).draw(g);
@@ -89,6 +91,26 @@ class Game extends JPanel {
         player.setDead(true);
       }
     }
+
+    Block[][] blocks = b.getMapBuffer();
+
+    for (int i = 0; i < blocks.length; i++) {
+      for (int j = 0; j < blocks[i].length; j++) {
+        if (blocks[i][j] != null) {
+          Rectangle blockRectangle = blocks[i][j].getRect();
+          if (player.collides(blockRectangle)) {
+            player.setFalling(false);
+            player.setJumping(false);
+          }
+          for (int k = 0; k < mobs.size(); k++) {
+            if (mobs.get(k).collides(blockRectangle)) {
+              mobs.get(k).setFalling(false);
+            }
+          }
+        }
+      }
+    }
+
     this.repaint();
   }
 

@@ -91,8 +91,13 @@ class Player {
     this.y = this.y + (int) this.dy;
     this.playerRect.x = this.x;
     this.playerRect.y = this.y;
-    this.dx = 0;
-    this.dy = 1;
+    if (falling) {
+      this.dx = 0;
+      this.dy = 1;
+    } else {
+      this.dx = 0;
+      this.dy = 0;
+    }
   }
 
   public void moveRight() {
