@@ -10,17 +10,17 @@ import java.awt.Graphics;
 
 class Biome {
 
-	String SAVE_PATH            = "../saves/";
-	String SAVE_EXTENSION       = ".map";
-	int    X_BUFFER_SIZE        = 1920/30; // => 60
-	int    Y_BUFFER_SIZE        = 1080/30; // => 36
-	int    GROUND_SCALE         = 15;
-	int    UNDERGROUND_SCALE    = 5;
-	String TYPE;
+	private String SAVE_PATH            = "../saves/";
+	private String SAVE_EXTENSION       = ".map";
+	private int    X_BUFFER_SIZE        = 1920/30; // => 60
+	private int    Y_BUFFER_SIZE        = 1080/30; // => 36
+	private int    GROUND_SCALE         = 15;
+	private int    UNDERGROUND_SCALE    = 5;
+	private String TYPE;
 
-	Block[][] mapBuffer = new Block[Y_BUFFER_SIZE][X_BUFFER_SIZE];
-	String outlineBlock, fillBlock;
-	String undergroundBlock = "stone";
+	private Block[][] mapBuffer = new Block[Y_BUFFER_SIZE][X_BUFFER_SIZE];
+	private String outlineBlock, fillBlock;
+	private String undergroundBlock = "stone";
 	double[] seedGround;
 	double[] groundOutline;
 
@@ -43,6 +43,10 @@ class Biome {
 		if (mapBuffer[y][x] == null) {
 			mapBuffer[y][x] = new Block(x, y, type);
 		}
+	}
+
+	public Block[][] getMapBuffer() {
+		return mapBuffer;
 	}
 
 	public int[] getHeight() {
