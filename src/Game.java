@@ -4,26 +4,27 @@ import java.awt.Color;
 import java.io.File;
 import javax.imageio.ImageIO;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 class Game extends JPanel {
   
   Player player;
   
-  Mob[] mobs;
-
+  ArrayList<Mob> mobs;
+  
   Biome b = new Biome("tundra");
   
   Game() {
     
     player = new Player(300, 300, 100, 25, 10, 1, false, "player");
-
-    mobs = new Mob[5];
     
-    for (int i = 0; i < mobs.length; i++) {
-      mobs[i] = new Zombie(100 + (50 * i), 100 + (75 * i));
+    mobs = new ArrayList<Mob>();
+    
+    for (int i = 0; i < 5; i++) {
+      mobs.add(new Zombie(100 + (50 * i), 100 + (75 * i)));
     }
-
-    b.generateTerrain();
+    
+    b.generateBiome();
     
     PlayerController playerController = new PlayerController(player);
     this.addKeyListener(playerController);
@@ -58,19 +59,29 @@ class Game extends JPanel {
     
     //this.drawBackground(g);
     
+    b.renderBiome(g);
+    
     player.move();
     player.draw(g);
     
-    for (int i = 0; i < mobs.length; i++) {
-      if (!mobs[i].isDead){
-        mobs[i].pathFinding(player);
-        mobs[i].move();
-        mobs[i].draw(g);
+    for (int i = 0; i < mobs.size(); i++) {
+      System.out.println(i);
+      mobs.get(i).pathFinding(player);
+      mobs.get(i).move();
+      mobs.get(i).draw(g);
+      if (mobs.get(i).mobRect.intersects(player.x, player.y, 35, 35)){
+        System.out.println("Ouch! " + i);
+        player.attack(mobs.get(i));
+        mobs.get(i).attack(player);
+      }
+      if (mobs.get(i).health <= 0){
+        mobs.get(i).setDead(true); 
+        mobs.remove(i);
+      }
+      if (player.health <= 0){
+        player.setDead(true); 
       }
     }
-
-    b.renderBiome(g);
-    
     this.repaint();
   }
   
