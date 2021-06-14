@@ -6,7 +6,6 @@ import java.awt.Graphics;
 
 /**
  * TODO save method
- * TODO generate method
  */
 
 class Biome {
@@ -15,7 +14,7 @@ class Biome {
 	String SAVE_EXTENSION       = ".map";
 	int    X_BUFFER_SIZE        = 1920/30; // => 60
 	int    Y_BUFFER_SIZE        = 1080/30; // => 36
-	int    GROUND_SCALE         = 12;
+	int    GROUND_SCALE         = 15;
 	int    UNDERGROUND_SCALE    = 5;
 	String TYPE;
 
@@ -42,55 +41,67 @@ class Biome {
 		return arr;
 	}
 
-	public void saveBiome() throws Exception {
+	public void saveBiome() {
 		try {
 			File saveFile = new File(SAVE_PATH + TYPE + SAVE_EXTENSION);
-			if (saveFile.createNewFile()) {
-				System.out.println("Save File Created");
-			}
 			PrintWriter output = new PrintWriter(saveFile);
 			for (int i=0; i < mapBuffer.length; i++) {
 				for (int j=0; j < mapBuffer[i].length; j++) {
-					switch(mapBuffer[i][j].getType()) {
-					case "dirt"      : output.print("1"); break;
-					case "grass"     : output.print("2"); break;
-					case "leaf"      : output.print("3"); break;
-					case "sand"      : output.print("4"); break;
-					case "snow"      : output.print("5"); break;
-					case "stone"     : output.print("6"); break;
-					case "wood"      : output.print("7"); break;
-					case "sandstone" : output.print("8"); break;
+					if (mapBuffer[i][j] == null) {
+					} else {
+						switch(mapBuffer[i][j].getType()) {
+							case "dirt"  : output.print("1"); break;
+							case "grass" : output.print("2"); break;
+							case "leaf"  : output.print("3"); break;
+							case "sand"  : output.print("4"); break;
+							case "snow"  : output.print("5"); break;
+							case "stone" : output.print("6"); break;
+							case "wood"  : output.print("7"); break;
+							case "sands" : output.print("8"); break;
+							default      : output.print(" "); break;
+						}
 					}
 				}
 				output.println();
 			}
-		output.close();
+			output.close();
 		} catch (IOException e) {
-			System.out.println("Error Writing to Save File");
-			e.printStackTrace();
+			System.out.println("Err: Didn't Save File");
+			//e.printStackTrace();
 		}
 	}
 
-	public String[] loadBiome(String type) throws Exception {
-
-		String[] biomeBuffer = new String[Y_BUFFER_SIZE];
-		Scanner input = new Scanner(new File(SAVE_PATH + type + SAVE_EXTENSION));
-
-		for (int i=0; input.hasNext(); i++) {
-			biomeBuffer[i] = input.nextLine();
+	public void loadBiome() {
+		try {
+			Scanner input = new Scanner(new File(SAVE_PATH + TYPE + SAVE_EXTENSION));
+			for (int i=0; input.hasNext(); i++) {
+				String line = input.nextLine();
+				for (int j=0; j < line.length(); j++) {
+					switch (line.charAt(j)) {
+						case '1' : mapBuffer[i][j] = new Block(j, i, "dirt" ); break;
+						case '2' : mapBuffer[i][j] = new Block(j, i, "grass"); break;
+						case '3' : mapBuffer[i][j] = new Block(j, i, "leaf" ); break;
+						case '4' : mapBuffer[i][j] = new Block(j, i, "sand" ); break;
+						case '5' : mapBuffer[i][j] = new Block(j, i, "snow" ); break;
+						case '6' : mapBuffer[i][j] = new Block(j, i, "stone"); break;
+						case '7' : mapBuffer[i][j] = new Block(j, i, "wood" ); break;
+						case '8' : mapBuffer[i][j] = new Block(j, i, "sands"); break;
+					}
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Error Reading Save File");
 		}
-
-		return biomeBuffer;
 	}
 
 	public void generateBiome() {
 		Noise noiseGenerator = new Noise(X_BUFFER_SIZE, Y_BUFFER_SIZE / 2);
 
-		seedGround      = noiseGenerator.makeSeed(1);
+		seedGround               = noiseGenerator.makeSeed(1);
 		double[] seedUnderground = noiseGenerator.makeSeed(1);
 		double[] seedFill        = noiseGenerator.makeSeed(2);
 
-		groundOutline      = noiseGenerator.perlinNoise1D(seedGround     , 2, 2.0);
+		groundOutline               = noiseGenerator.perlinNoise1D(seedGround     , 2, 2.0);
 		double[] undergroundOutline = noiseGenerator.perlinNoise1D(seedUnderground, 2, 2.0);
 
 		for (int i=0; i < X_BUFFER_SIZE; i++) {
