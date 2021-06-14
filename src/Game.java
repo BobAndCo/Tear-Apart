@@ -1,8 +1,5 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import jdk.jfr.internal.PlatformEventType;
-
 import java.awt.Color;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -15,7 +12,7 @@ class Game extends JPanel {
 
   ArrayList<Mob> mobs;
 
-  Biome b = new Biome("tundra");
+  Biome b = new Biome("plains");
 
   MyMouseListener playerMouse = new MyMouseListener();
 
@@ -27,7 +24,7 @@ class Game extends JPanel {
     mobs = new ArrayList<Mob>();
 
     for (int i = 0; i < 5; i++) {
-      mobs.add(new Zombie(100 + (50 * i), 100 + (75 * i)));
+      mobs.add(new Zombie(200 + (50 * i), 100 + (75 * i)));
     }
 
     b.generateBiome();
@@ -71,12 +68,15 @@ class Game extends JPanel {
     player.move();
     player.draw(g);
 
+    for (int i = 0; i < b.getHeight().length; i++) {
+
+    }
+
     for (int i = 0; i < mobs.size(); i++) {
-      System.out.println(i);
-      mobs.get(i).pathFinding(player);
-      mobs.get(i).move();
       mobs.get(i).draw(g);
-      if (mobs.get(i).mobRect.intersects(player.x, player.y, 35, 35)) {
+      mobs.get(i).move();
+      mobs.get(i).pathFinding(player);
+      if (player.collides(mobs.get(i).mobRect)) {
         System.out.println("Ouch! " + i);
         player.attack(mobs.get(i));
         mobs.get(i).attack(player);

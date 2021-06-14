@@ -5,7 +5,7 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-class Player{
+class Player {
 
   String SPRITE_PATH = "../sprites/";
   String SPRITE_EXTENSION = ".jpg";
@@ -48,29 +48,36 @@ class Player{
     this.spriteName = spriteName;
 
   }
-  
-  public boolean getDead(){
-   return isDead; 
+
+  public boolean collides(Rectangle rect) {
+    if (x < rect.x + 30 && x + 30 > rect.x && y < rect.y + 30 && y + 30 > rect.y) {
+      return true;
+    }
+    return false;
   }
-  
-  public void setDead(boolean deathValue){
-   this.isDead = deathValue;
+
+  public boolean getDead() {
+    return isDead;
   }
-  
-  public boolean getFalling(){
-   return falling; 
+
+  public void setDead(boolean deathValue) {
+    this.isDead = deathValue;
   }
-  
-  public void setFalling(boolean fall){
-   this.falling = fall;
+
+  public boolean getFalling() {
+    return falling;
   }
-  
-  public boolean getJumping(){
-   return jumping; 
+
+  public void setFalling(boolean fall) {
+    this.falling = fall;
   }
-  
-  public void setJumping(boolean jump){
-   this.jumping = jump;
+
+  public boolean getJumping() {
+    return jumping;
+  }
+
+  public void setJumping(boolean jump) {
+    this.jumping = jump;
   }
 
   public void attack(Mob mob) {
@@ -80,8 +87,10 @@ class Player{
   }
 
   public void move() {
-    this.x = this.x + (int)this.dx;
-    this.y = this.y + (int)this.dy;
+    this.x = this.x + (int) this.dx;
+    this.y = this.y + (int) this.dy;
+    this.playerRect.x = this.x;
+    this.playerRect.y = this.y;
     this.dx = 0;
     this.dy = 1;
   }
@@ -116,7 +125,7 @@ class Player{
   }
 
   public void draw(Graphics g) {
-    if (!this.isDead){
+    if (!this.isDead) {
       g.drawImage(this.sprite, this.x, this.y, null);
     }
   }
