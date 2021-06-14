@@ -1,5 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import jdk.jfr.internal.PlatformEventType;
+
 import java.awt.Color;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -7,42 +10,45 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 class Game extends JPanel {
-  
+
   Player player;
-  
+
   ArrayList<Mob> mobs;
-  
+
   Biome b = new Biome("tundra");
-  
+
+  MyMouseListener playerMouse = new MyMouseListener();
+
   Game() {
-    
+
     player = new Player(300, 300, 100, 25, 10, 1, false, "player");
-    
+    this.addMouseListener(playerMouse);
+
     mobs = new ArrayList<Mob>();
-    
+
     for (int i = 0; i < 5; i++) {
       mobs.add(new Zombie(100 + (50 * i), 100 + (75 * i)));
     }
-    
+
     b.generateBiome();
-    
+
     PlayerController playerController = new PlayerController(player);
     this.addKeyListener(playerController);
-    
+
     this.setFocusable(true);
     this.requestFocusInWindow();
-    
+
   }
-  
+
   public void animate() {
     boolean quit = false;
-    
+
     while (!quit) {
       this.repaint();
     }
-    
+
   }
-  
+
   public void drawBackground(Graphics g) {
     try {
       File BACKGROUND_IMAGE = new File("../sprites/background.jpeg");
@@ -52,41 +58,38 @@ class Game extends JPanel {
     }
     ;
   }
-  
+
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
     setDoubleBuffered(true);
-    
-<<<<<<< HEAD
-    //this.drawBackground(g);
-    
+
+    // this.drawBackground(g);
+
+    b.addBlock(playerMouse.getX(), playerMouse.getY(), "dirt");
     b.renderBiome(g);
-    
-=======
-	b.saveBiome();
->>>>>>> 4955b3312c2053873b6d9c65e9b0702afc430400
+
     player.move();
     player.draw(g);
-    
+
     for (int i = 0; i < mobs.size(); i++) {
       System.out.println(i);
       mobs.get(i).pathFinding(player);
       mobs.get(i).move();
       mobs.get(i).draw(g);
-      if (mobs.get(i).mobRect.intersects(player.x, player.y, 35, 35)){
+      if (mobs.get(i).mobRect.intersects(player.x, player.y, 35, 35)) {
         System.out.println("Ouch! " + i);
         player.attack(mobs.get(i));
         mobs.get(i).attack(player);
       }
-      if (mobs.get(i).health <= 0){
-        mobs.get(i).setDead(true); 
+      if (mobs.get(i).health <= 0) {
+        mobs.get(i).setDead(true);
         mobs.remove(i);
       }
-      if (player.health <= 0){
-        player.setDead(true); 
+      if (player.health <= 0) {
+        player.setDead(true);
       }
     }
     this.repaint();
   }
-  
+
 }
