@@ -17,11 +17,14 @@ class Player {
   public int jumpHeight;
 
   private boolean isDead;
+
   private boolean falling = true;
   private boolean jumping = false;
+  private boolean movingRight = true;
+  private boolean movingLeft = true;
 
   private double dx, dy;
-  Rectangle playerRect;
+  private Rectangle playerRect;
 
   public BufferedImage sprite;
   String spriteName;
@@ -49,6 +52,10 @@ class Player {
 
   }
 
+  public Rectangle getRect() {
+    return playerRect;
+  }
+
   public boolean collides(Rectangle rect) {
     if (x < rect.x + 30 && x + 30 > rect.x && y < rect.y + 30 && y + 30 > rect.y) {
       return true;
@@ -74,6 +81,22 @@ class Player {
 
   public boolean getJumping() {
     return jumping;
+  }
+
+  public void setMoveRight(boolean right) {
+    this.movingRight = right;
+  }
+
+  public boolean getMoveRight() {
+    return movingRight;
+  }
+
+  public void setMoveLeft(boolean left) {
+    this.movingLeft = left;
+  }
+
+  public boolean getMoveLeft() {
+    return movingLeft;
   }
 
   public void setJumping(boolean jump) {

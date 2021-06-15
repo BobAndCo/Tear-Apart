@@ -19,7 +19,7 @@ abstract class Mob {
   private boolean falling = true;
 
   public int dx, dy;
-  Rectangle mobRect;
+  private Rectangle mobRect;
 
   public BufferedImage sprite;
   String spriteName;
@@ -48,6 +48,10 @@ abstract class Mob {
       return true;
     }
     return false;
+  }
+
+  public Rectangle getRect() {
+    return mobRect;
   }
 
   public boolean getFalling() {
@@ -141,12 +145,6 @@ abstract class Mob {
 }
 
 class Zombie extends Mob {
-
-  public int x, y;
-  public int health;
-  public int damage;
-  public int speed;
-  public boolean isDead;
 
   Zombie(int x, int y) {
     super(x, y, 1, 1, 10, false, "snow");

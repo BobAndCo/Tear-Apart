@@ -16,7 +16,7 @@ class Block {
 	BufferedImage sprite;
 	boolean broken = false;
 	private String TYPE;
-	public Rectangle blockRect;
+	private Rectangle blockRect;
 
 	Block(int x, int y, String type) {
 		this.x = x;
