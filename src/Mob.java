@@ -7,52 +7,53 @@ import java.awt.Rectangle;
 
 /**
  *
- * This class is an abstract class to represent each basic 
- * mob and its properties, this is the building block upon which all the
- * Mobs are built
+ * This class is an abstract class to represent each basic mob and its
+ * properties, this is the building block upon which all the Mobs are built
+ * 
  * @author Khush Negandhi
- * @version 1.0, May 2021 
+ * @version 1.0, May 2021
  * 
  */
 
 abstract class Mob {
 
-  //Sprite path
+  // Sprite path
   String SPRITE_PATH = "../sprites/";
   String SPRITE_EXTENSION = ".png";
 
-  //The coordinates
+  // The coordinates
   public int x, y;
-  //The health
+  // The health
   public int health;
-  //The damage
+  // The damage
   public int damage;
-  //The speed
+  // The speed
   public int speed;
 
-  //To see if the mob is dead
+  // To see if the mob is dead
   private boolean isDead;
-  //To see if the mob is falling 
+  // To see if the mob is falling
   private boolean falling = true;
 
-  //Change in x,y corrdinates respectively
+  // Change in x,y corrdinates respectively
   public int dx, dy;
-  //Rectangle collision mesh 
+  // Rectangle collision mesh
   private Rectangle mobRect;
 
-  //Sprite
+  // Sprite
   public BufferedImage sprite;
-  //Sprite name
+  // Sprite name
   String spriteName;
 
   /**
    * Creates a mob object with the specified information
-   * @param x The x coordinate of the mob
-   * @param y The x coordinate of the mob
-   * @param health The health of the mob
-   * @param speed The speed of the mob
-   * @param damage The attack power of the mob
-   * @param dead The state of the mob(dead or alive)
+   * 
+   * @param x          The x coordinate of the mob
+   * @param y          The x coordinate of the mob
+   * @param health     The health of the mob
+   * @param speed      The speed of the mob
+   * @param damage     The attack power of the mob
+   * @param dead       The state of the mob(dead or alive)
    * @param spriteName The name of the sprite used by the mob
    */
   Mob(int x, int y, int health, int speed, int damage, boolean dead, String spriteName) {
@@ -63,12 +64,12 @@ abstract class Mob {
     this.speed = speed;
     this.damage = damage;
     this.dx = 0;
-    //Gravity
+    // Gravity
     this.dy = 1;
 
-    //Finds the sprite and associates it with the mob
+    // Finds the sprite and associates it with the mob
     this.sprite = loadSprite(SPRITE_PATH + spriteName + SPRITE_EXTENSION);
-    //Makes the mob rectangle
+    // Makes the mob rectangle
     this.mobRect = new Rectangle(x, y, 30, 30);
 
     this.isDead = dead;
@@ -78,8 +79,10 @@ abstract class Mob {
   }
 
   /**
-   * Checks if the mob collided with another Rectangle 
-   * @param Rectangle the rectangle body of teh object we want to check the mob collided with
+   * Checks if the mob collided with another Rectangle
+   * 
+   * @param Rectangle the rectangle body of teh object we want to check the mob
+   *                  collided with
    * @return if the mob collided with a Rectangle or not
    */
   public boolean collides(Rectangle rect) {
@@ -91,6 +94,7 @@ abstract class Mob {
 
   /**
    * Returns the rectangle of the mob
+   * 
    * @return the rectangle of the mob
    */
   public Rectangle getRect() {
@@ -99,14 +103,16 @@ abstract class Mob {
 
   /**
    * If the mob is falling or not
+   * 
    * @return falling state
    */
   public boolean getFalling() {
     return falling;
   }
 
-   /**
+  /**
    * Setter to set the falling state of the mob
+   * 
    * @param fall sets the falling state
    */
   public void setFalling(boolean fall) {
@@ -115,6 +121,7 @@ abstract class Mob {
 
   /**
    * If the mob is dead or not
+   * 
    * @return death state
    */
   public boolean getDead() {
@@ -123,6 +130,7 @@ abstract class Mob {
 
   /**
    * Setter to set the death state of the mob
+   * 
    * @param deathValue sets the falling state
    */
   public void setDead(boolean deathValue) {
@@ -131,11 +139,12 @@ abstract class Mob {
 
   /**
    * Finds a path to the player
+   * 
    * @param player Is the player
    */
   public void pathFinding(Player player) {
 
-    //Checks if the player is in range of the mob and if so then moves accordingly
+    // Checks if the player is in range of the mob and if so then moves accordingly
     if (player.x - this.x >= 0 && player.x - this.x <= 100) {
       this.moveRight();
       this.move();
@@ -143,7 +152,7 @@ abstract class Mob {
       this.moveLeft();
       this.move();
     }
-    //Sleeps so it doesn't go crazy
+    // Sleeps so it doesn't go crazy
     try {
       Thread.sleep(10);
     } catch (Exception exc) {
@@ -154,6 +163,7 @@ abstract class Mob {
 
   /**
    * Attacks the player
+   * 
    * @param player Is the player
    */
   public void attack(Player player) {
@@ -163,7 +173,7 @@ abstract class Mob {
   }
 
   /**
-   * Moves the mob 
+   * Moves the mob
    */
   public void move() {
     this.x = this.x + (int) this.dx;
@@ -202,6 +212,7 @@ abstract class Mob {
 
   /**
    * Allows the mob to take damage
+   * 
    * @param damageTaken The amount of damage inflicted
    */
   public void takeDamage(int damageTaken) {
@@ -219,6 +230,7 @@ abstract class Mob {
 
   /**
    * Allows the mob to take damage
+   * 
    * @param damageTaken The amount of damage inflicted
    * @return BufferedImage The image or sprite of the mob
    */
@@ -235,7 +247,7 @@ abstract class Mob {
    * Draws the mob
    */
   public void draw(Graphics g) {
-    //Checks if the mob is dead or not
+    // Checks if the mob is dead or not
     if (!isDead) {
       g.drawImage(this.sprite, this.x, this.y, null);
     }
@@ -246,7 +258,7 @@ abstract class Mob {
 class Zombie extends Mob {
 
   Zombie(int x, int y) {
-    super(x, y, 1, 3, 1, false, "snow");
+    super(x, y, 1, 3, 1, false, "zombie");
   }
 
 }
@@ -254,7 +266,7 @@ class Zombie extends Mob {
 class Creeper extends Mob {
 
   Creeper(int x, int y) {
-    super(x, y, 1, 5, 1, false, "wood");
+    super(x, y, 1, 5, 1, false, "creeper");
   }
 
 }
@@ -262,7 +274,7 @@ class Creeper extends Mob {
 class Frozen extends Mob {
 
   Frozen(int x, int y) {
-    super(x, y, 1, 1, 1, false, "dirt");
+    super(x, y, 1, 1, 1, false, "drowned");
   }
 
 }
