@@ -12,12 +12,12 @@ class Game extends JPanel {
 	Player player;
 
 	Mob[][] mobs;
-	MenuKeyListener menuKey = new MenuKeyListener();
 	boolean play = false;
 	boolean mainMenuLoop = true;
 	ArrayList<Biome> b;
 
 	MyMouseListener playerMouse = new MyMouseListener();
+	MenuKeyListener menuKey;
 	PlayerController playerController;
 
 	private int currentBiome;
@@ -60,6 +60,8 @@ class Game extends JPanel {
 		}
 
 		playerController = new PlayerController(player);
+		menuKey = new MenuKeyListener();
+
 		this.addKeyListener(playerController);
 		this.addKeyListener(menuKey);
 
