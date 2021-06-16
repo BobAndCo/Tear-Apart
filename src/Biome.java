@@ -145,7 +145,7 @@ class Biome {
 							case "wood":
 								output.print("7");
 								break; // wood is 7
-							case "sands":
+							case "stone":
 								output.print("8");
 								break; // sandstone is 8
 							default:
