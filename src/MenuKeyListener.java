@@ -1,14 +1,24 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * [MenuKeyListener.java]
+ * @author Kian Dianati
+ * @version 1.0 Build 15 Jun 2021
+ * KeyListener for menus
+ */
+
 class MenuKeyListener implements KeyListener {
 
+	/* variables */
 	private int keyPressed = 0;
 	private boolean entered = false;
 
-	MenuKeyListener() {
-	}
-
+	/**
+	 * keyTyped
+	 * change keyPressed based the pressed key
+	 * @pararm e KeyEvent
+	 */
 	public void keyTyped(KeyEvent e) {
 		char key = e.getKeyChar();
 		if (key == 'w') {
@@ -23,10 +33,18 @@ class MenuKeyListener implements KeyListener {
 		}
 	}
 
+	/**
+	 * getKeyPressed
+	 * getter for keyPressed
+	 */
 	public int getKeyPressed() {
 		return keyPressed;
 	}
 
+	/**
+	 * getEntered
+	 * getter for entered
+	 */
 	public boolean getEntered() {
 		return entered;
 	}

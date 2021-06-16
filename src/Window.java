@@ -7,14 +7,23 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingUtilities;
 
+/**
+ * [Window.java]
+ * @author Kian Dianati
+ * @version 1.0 Build 15 Jun 2021
+ */
+
 class Window extends JFrame { 
 
  JFrame frame;
 
+ /* Constants */
  int ROWS    = 500;
  int COLUMNS = 500;
      
+ /* Constructor */
  Window() { 
+	 /* Boiler Plate */
   super("Terrapart!");
   this.frame = this;
                    
@@ -32,6 +41,11 @@ class Window extends JFrame {
   this.setVisible(true);
  }
      
+ /**
+  * main
+  * main method
+  * @param args
+  */
  public static void main(String[] args) { 
   new Window();
  }

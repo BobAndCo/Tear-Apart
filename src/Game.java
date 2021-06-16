@@ -89,7 +89,6 @@ class Game extends JPanel {
     this.requestFocusInWindow();
     
   }
-  
   /**
    * Animates the screen meaning redraws things on the screen
    */
@@ -136,6 +135,7 @@ class Game extends JPanel {
       g.drawRect(720, 610, 480, 50);
       g.drawString("Exit", 720+(480/2), 610+(50/2));
       
+	/* Determine which block to highlight */
       switch(menuKey.getKeyPressed()) {
         case 0  :
           g.setColor(new Color(200, 0, 0));
@@ -147,6 +147,7 @@ class Game extends JPanel {
           break;
       }
       
+	/* Select from the menu */
       if (menuKey.getEntered()) {
         if (menuKey.getKeyPressed() == 0) {
           play = true;

@@ -5,12 +5,21 @@ import javax.imageio.ImageIO;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+/**
+ * [Block.java]
+ * @author Kian Dianati
+ * @version 1.0 Build 15 Jun 2021
+ * define the block type
+ */
+
 class Block {
 
+	/* Constants */
 	private String SPRITE_PATH = "../sprites/";
 	private String SPRITE_EXTENSION = ".png";
 	private int BLOCK_SIDE = 30;
 
+	/* Variables */
 	protected int x, y;
 	protected int durability;
 	BufferedImage sprite;
@@ -18,6 +27,7 @@ class Block {
 	private String TYPE;
 	private Rectangle blockRect;
 
+	/* Constructor */
 	Block(int x, int y, String type) {
 		this.x = x;
 		this.y = y;
@@ -49,21 +59,28 @@ class Block {
 		}
 	}
 
+	/**
+	 * getType
+	 * getter for TYPE variable
+	 */
 	public String getType() {
 		return TYPE;
 	}
 
+	/**
+	 * getRect
+	 * getter for the blockRect variable
+	 */
 	public Rectangle getRect() {
 		return blockRect;
 	}
 
-	public void loseDurability(int durability) {
-		if (this.durability < 1) {
-			broken = true;
-		}
-		this.durability -= durability;
-	}
-
+	/**
+	 * loadSprite
+	 * load the sprite based on spriteName
+	 * @param spriteName the file name of the sprite
+	 * @return BufferedImage of the sprite
+	 */
 	public BufferedImage loadSprite(String spriteName) {
 		try {
 			return sprite = ImageIO.read(new File(spriteName));
@@ -73,6 +90,11 @@ class Block {
 		return null;
 	}
 
+	/**
+	 * draw
+	 * draw the graphics based on the tiling system
+	 * @param g graphics
+	 */
 	public void draw(Graphics g) {
 		g.drawImage(sprite, x * BLOCK_SIDE, y * BLOCK_SIDE, null);
 	}

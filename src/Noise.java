@@ -1,3 +1,7 @@
+/*
+ * https://youtu.be/6-0UaeJBumA
+ */
+
 class Noise {
 
 	int width, height;
