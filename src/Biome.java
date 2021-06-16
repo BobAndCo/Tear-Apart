@@ -66,6 +66,10 @@ class Biome {
 		return mapBuffer;
 	}
 
+	public String getType() {
+		return TYPE;
+	}
+
 	public void saveBiome() {
 		try {
 			File saveFile = new File(SAVE_PATH + TYPE + SAVE_EXTENSION);

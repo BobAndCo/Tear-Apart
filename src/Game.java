@@ -11,7 +11,7 @@ class Game extends JPanel {
 
   Player player;
 
-  ArrayList<Mob> mobs;
+  Mob[][] mobs;
   ArrayList<Biome> b;
 
   MyMouseListener playerMouse = new MyMouseListener();
@@ -24,11 +24,7 @@ class Game extends JPanel {
 
     player = new Player(300, 300, 100, 25, 10, 1, false, "player");
 
-    mobs = new ArrayList<Mob>();
-
-    for (int i = 0; i < 5; i++) {
-      mobs.add(new Zombie(100 + (50 * i), 100 + (75 * i)));
-    }
+    mobs = new Mob[maxBiomes][5];
 
     b = new ArrayList<Biome>();
 
@@ -40,6 +36,18 @@ class Game extends JPanel {
         b.add(new Biome("desert"));
       } else if (random == 2) {
         b.add(new Biome("tundra"));
+      }
+    }
+
+    for (int i = 0; i < maxBiomes; i++) {
+      for (int j = 0; j < 5; j++) {
+        if (b.get(i).getType().equals("plains")) {
+          mobs[i][j] = new Zombie(100 * j, 0);
+        } else if (b.get(i).getType().equals("desert")) {
+          mobs[i][j] = new Creeper(100 * j, 0);
+        } else if (b.get(i).getType().equals("tundra")) {
+          mobs[i][j] = new Frozen(100 * j, 0);
+        }
       }
     }
 
@@ -112,19 +120,19 @@ class Game extends JPanel {
       b.get(currentBiome).addBlock(playerMouse.getX(), playerMouse.getY(), playerController.getSelectedBlock());
     }
 
-    for (int i = 0; i < mobs.size(); i++) {
+    for (int i = 0; i < mobs[currentBiome].length; i++) {
       // System.out.println(i);
-      mobs.get(i).pathFinding(player);
-      mobs.get(i).move();
-      mobs.get(i).draw(g);
-      if (mobs.get(i).collides(player.getRect())) {
+
+      mobs[currentBiome][i].pathFinding(player);
+      mobs[currentBiome][i].move();
+      mobs[currentBiome][i].draw(g);
+      if (mobs[currentBiome][i].collides(player.getRect())) {
         // System.out.println("Ouch! " + i);
-        player.attack(mobs.get(i));
-        mobs.get(i).attack(player);
+        player.attack(mobs[currentBiome][i]);
+        mobs[currentBiome][i].attack(player);
       }
-      if (mobs.get(i).health <= 0) {
-        mobs.get(i).setDead(true);
-        mobs.remove(i);
+      if (mobs[currentBiome][i].health <= 0) {
+        mobs[currentBiome][i].setDead(true);
       }
       if (player.health <= 0) {
         player.setDead(true);
@@ -141,9 +149,9 @@ class Game extends JPanel {
             player.setFalling(false);
             player.setJumping(false);
           }
-          for (int k = 0; k < mobs.size(); k++) {
-            if (mobs.get(k).collides(blockRectangle)) {
-              mobs.get(k).setFalling(false);
+          for (int k = 0; k < mobs[currentBiome].length; k++) {
+            if (mobs[currentBiome][k].collides(blockRectangle)) {
+              mobs[currentBiome][k].setFalling(false);
             }
           }
         }

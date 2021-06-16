@@ -139,7 +139,9 @@ abstract class Mob {
   }
 
   public void draw(Graphics g) {
-    g.drawImage(this.sprite, this.x, this.y, null);
+    if (!isDead) {
+      g.drawImage(this.sprite, this.x, this.y, null);
+    }
   }
 
 }
@@ -147,7 +149,23 @@ abstract class Mob {
 class Zombie extends Mob {
 
   Zombie(int x, int y) {
-    super(x, y, 1, 1, 10, false, "snow");
+    super(x, y, 1, 3, 10, false, "snow");
+  }
+
+}
+
+class Creeper extends Mob {
+
+  Creeper(int x, int y) {
+    super(x, y, 1, 5, 10, false, "wood");
+  }
+
+}
+
+class Frozen extends Mob {
+
+  Frozen(int x, int y) {
+    super(x, y, 1, 1, 10, false, "dirt");
   }
 
 }
